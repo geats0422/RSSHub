@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: rsshub
+    env: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    port: 1200
+    envVars:
+      - key: CACHE_EXPIRE
+        value: "300"
+      - key: CACHE_CONTENT_EXPIRE
+        value: "3600"
+      - key: NODE_ENV
+        value: production
+      - key: CACHE_TYPE
+        value: memory
+      # 其他环境变量在Render控制台设置，不要放在这里！
+    healthCheckPath: /healthz
+    region: oregon
