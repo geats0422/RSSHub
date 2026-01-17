@@ -1,9 +1,13 @@
 FROM diygod/rsshub:chromium-bundled
 
-# 设置环境变量
+# 基础环境变量
 ENV NODE_ENV=production
-ENV CACHE_TYPE=memory  # 使用内存缓存，避免Redis依赖
+ENV CACHE_TYPE=memory
+
+# Puppeteer/Chromium配置
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
+ENV PUPPETEER_SKIP_DOWNLOAD=true
+ENV CHROMIUM_FLAGS="--no-sandbox --disable-dev-shm-usage --disable-gpu --single-process --disable-setuid-sandbox"
 
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
